@@ -4,11 +4,10 @@ title: Plotly Example
 toc: false
 ---
 
-
 <h2>Changes Admitting Service Class</h2>
 
-<div id="tester" style="width:600px;height:250px;"></div>
-<div id="myDiv" style="width:600px;height:250px;"></div>
+<div id="tester" style="display:none;width:600px;height:250px;"></div>
+<div id="myDiv" style="display:none;width:600px;height:250px;"></div>
 <div id="chart" style="width:800px;height:600px;"></div>
 
 ```js
@@ -50,34 +49,52 @@ toc: false
 ```js
     const hospital_change_admitting_service_class = await FileAttachment("./data/hospital_change_admitting_service_class.csv").csv({ typed: true });
 
+    const processed_data_1 = hospital_change_admitting_service_class.map(row => ({
+    source: row.source + '_source',  // adjust field names as needed
+    target: row.target + '_target',  // adjust field names as needed
+    value: row.value            // adjust field names as needed
+    }));
+
+
     // Create the visualization
     function createSankeyDiagram(data) {
+    
+    const unique_labels_1 = [...new Set([...data.map(d => d.source ), ...data.map(d => d.target )])]
+    const labelToIndex = {};
+    unique_labels_1.forEach((label, index) => {
+    labelToIndex[label] = index;
+    });
+
     // Assuming data has columns like 'source', 'target', and 'value'
     const plotData = [{
         type: "sankey",
         orientation: "h",
         node: {
-        pad: 15,
-        thickness: 30,
-        line: {
-            color: "black",
-            width: 0.5
-        },
-        label: [...new Set([...data.map(d => d.source), ...data.map(d => d.target)])],
-        color: "blue"
+            pad: 15,
+            thickness: 30,
+            line: {
+                color: "white",
+                width: 1
+            },
+            label: unique_labels_1,
+            color: "#1f77b4"
         },
         link: {
-            source: data.map(d => d.source),
-            target: data.map(d => d.target),
-            value: data.map(d => d.value)
+            source: data.map(d => labelToIndex[d.source]),
+            target: data.map(d => labelToIndex[d.target]),
+            value: data.map(d => d.value),
+            color: 'rgba(31, 119, 180, 0.4)'  // Semi-transparent blue links
         }
     }];
 
     const layout = {
         title: "Hospital Service Changes Flow",
         font: {
-        size: 10
+            size: 15,
+            color: 'white'
         },
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'rgba(0,0,0,0)',
         width: 800,
         height: 600
     };
@@ -92,25 +109,7 @@ toc: false
     // etc.
 
     // Process the data and create the visualization
-    const processed_data = hospital_change_admitting_service_class.map(row => ({
-    source: row.source,  // adjust field names as needed
-    target: row.target,  // adjust field names as needed
-    value: row.value            // adjust field names as needed
-    }));
-    createSankeyDiagram(processed_data)
-    
-    const unique_labels = [...new Set([...processed_data.map(d => d.source), ...processed_data.map(d => d.target)])]
-    const source = processed_data.map(d => d.source)
-    const target = processed_data.map(d => d.target)
-    const value = processed_data.map(d => d.value)
 
-    console.log(processed_data)
-    console.log(unique_labels)
-    console.log(source)
-    console.log(target)
-    console.log(value)
+    createSankeyDiagram(processed_data_1)
 
-    
 ```
-
-
