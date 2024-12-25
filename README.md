@@ -1,57 +1,59 @@
-<header>
+# Hello Framework
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+This is an [Observable Framework](https://observablehq.com/framework/) app. To install the required dependencies, run:
 
-# GitHub Pages
+```
+npm install
+```
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+Then, to start the local preview server, run:
 
-</header>
+```
+npm run dev
+```
 
-<!--
-  <<< Author notes: Finish >>>
-  Review what we learned, ask for feedback, provide next steps.
--->
+Then visit <http://localhost:3000> to preview your app.
 
-## Finish
+For more, see <https://observablehq.com/framework/getting-started>.
 
-_Congratulations friend, you've completed this course!_
+## Project structure
 
-<img src=https://octodex.github.com/images/constructocat2.jpg alt=celebrate width=300 align=right>
+A typical Framework project looks like this:
 
-Your blog is now live and has been deployed!
+```ini
+.
+├─ src
+│  ├─ components
+│  │  └─ timeline.js           # an importable module
+│  ├─ data
+│  │  ├─ launches.csv.js       # a data loader
+│  │  └─ events.json           # a static data file
+│  ├─ example-dashboard.md     # a page
+│  ├─ example-report.md        # another page
+│  └─ index.md                 # the home page
+├─ .gitignore
+├─ observablehq.config.js      # the app config file
+├─ package.json
+└─ README.md
+```
 
-Here's a recap of all the tasks you've accomplished in your repository:
+**`src`** - This is the “source root” — where your source files live. Pages go here. Each page is a Markdown file. Observable Framework uses [file-based routing](https://observablehq.com/framework/project-structure#routing), which means that the name of the file controls where the page is served. You can create as many pages as you like. Use folders to organize your pages.
 
-- You enabled GitHub Pages.
-- You selected a theme using the config file.
-- You learned about proper directory format and file naming conventions in Jekyll.
-- You created your first blog post with Jekyll!
+**`src/index.md`** - This is the home page for your app. You can have as many additional pages as you’d like, but you should always have a home page, too.
 
-### What's next?
+**`src/data`** - You can put [data loaders](https://observablehq.com/framework/data-loaders) or static data files anywhere in your source root, but we recommend putting them here.
 
-- Keep working on your GitHub Pages site... we love seeing what you come up with!
-- We'd love to hear what you thought of this course [in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages).
-- [Take another GitHub Skills course](https://github.com/skills).
-- [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
-- To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
+**`src/components`** - You can put shared [JavaScript modules](https://observablehq.com/framework/imports) anywhere in your source root, but we recommend putting them here. This helps you pull code out of Markdown files and into JavaScript modules, making it easier to reuse code across pages, write tests and run linters, and even share code with vanilla web applications.
 
-<footer>
+**`observablehq.config.js`** - This is the [app configuration](https://observablehq.com/framework/config) file, such as the pages and sections in the sidebar navigation, and the app’s title.
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+## Command reference
 
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+| Command           | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| `npm install`            | Install or reinstall dependencies                        |
+| `npm run dev`        | Start local preview server                               |
+| `npm run build`      | Build your static site, generating `./dist`              |
+| `npm run deploy`     | Deploy your app to Observable                            |
+| `npm run clean`      | Clear the local data loader cache                        |
+| `npm run observable` | Run commands like `observable help`                      |
