@@ -1,6 +1,6 @@
 ---
 theme: dashboard
-title: Plotly Example - Sankey Chart
+title: Plotly Example
 toc: false
 ---
 
@@ -12,7 +12,7 @@ toc: false
 
 ```js
     import Plotly from 'plotly.js-dist-min';
-    
+
     Plotly.newPlot( 'tester', [{
     x: [1, 2, 3, 4, 5],
     y: [1, 2, 4, 8, 16] }], {
