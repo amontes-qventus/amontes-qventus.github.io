@@ -12,6 +12,8 @@
     "@observablehq/framework": "^1.13.0",
     "d3-dsv": "^3.0.1",
     "d3-time-format": "^4.1.0",
+    "plotly.js": "^2.35.3",
+    "plotly.js-dist-min": "^2.35.3",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
